@@ -1,0 +1,49 @@
+<!-- res/layout/meal_item.xml -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 음식 이미지뷰 -->
+    <ImageView
+        android:id="@+id/foodImageView"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop" />
+
+    <!-- 음식 이름 텍스트뷰 -->
+    <TextView
+        android:id="@+id/foodNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/foodImageView"
+        android:text="음식 이름"
+        android:textSize="18sp" />
+
+    <!-- 날짜 텍스트뷰 -->
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/foodNameTextView"
+        android:layout_toEndOf="@id/foodImageView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="날짜"
+        android:textSize="14sp" />
+
+    <!-- 삭제 버튼 -->
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:text="삭제" />
+
+</RelativeLayout>

@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 식사 리뷰 목록 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonCluster"
+        android:layout_below="@+id/analysisCluster"
+        android:layout_marginStart="-1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="-1dp" />
+
+    <LinearLayout
+
+        android:id="@+id/analysisCluster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/monthTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:text="최근 30일 간" />
+        <TextView
+            android:id="@+id/caloryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/monthTextView"
+
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:text="총 칼로리 : " />
+        <TextView
+            android:id="@+id/breakfastTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/caloryTextView"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:text="조식 비용 : " />
+        <TextView
+            android:id="@+id/lunchTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/breakfastTextView"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:text="중식 비용 : " />
+        <TextView
+            android:id="@+id/dinnerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lunchTextView"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:text="석식 비용 : " />
+        <TextView
+            android:id="@+id/coffeeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dinneerTextView"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-1dp"
+            android:layout_marginBottom="1dp"
+            android:text="음료 비용 : " />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/buttonCluster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/addReviewButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:onClick="goToReviewActivity"
+            android:text="식사 리뷰 작성" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:onClick="goToReviewListActivity"
+            android:text="캘린더 보기" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="location_array">
+        <item>상록원 2층</item>
+        <item>상록원 3층</item>
+        <item>기숙사</item>
+    </string-array>
+
+    <string name="location_prompt">학식 장소 선택</string>
+</resources>

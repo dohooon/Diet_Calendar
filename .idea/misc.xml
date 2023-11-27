@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_review.xml" value="0.5405128205128205" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_review_list.xml" value="0.5494791666666666" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_reviewlist.xml" value="0.5" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/calendar_day_item.xml" value="0.5484375" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/calender_day_item.xml" value="0.45" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/dialog_layout.xml" value="0.2949438202247191" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment.xml" value="0.5348958333333333" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_calendar.xml" value="0.5484375" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_calendar_day.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_calendar_header.xml" value="0.26475548060708265" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_calender.xml" value="0.5494791666666666" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_day.xml" value="0.1" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_day_empty.xml" value="0.4083333333333333" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_meal.xml" value="0.5494791666666666" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_week.xml" value="0.2547008547008547" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/popup_layout.xml" value="0.5" />
+        <entry key="..\:/Users/hmku1/AndroidStudioProjects/MyApplication/app/src/main/res/layout/test.xml" value="0.5494791666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
