@@ -43,6 +43,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private MealAdapter mealAdapter;
     private List<Meal> mealList;
     private RecyclerView recyclerView;

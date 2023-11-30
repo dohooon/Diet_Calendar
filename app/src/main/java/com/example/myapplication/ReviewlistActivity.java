@@ -2,13 +2,12 @@ package com.example.myapplication;
 
 // ReviewListActivity.java
 
-// ReviewListActivity.java
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +33,11 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.example.myapplication.model.Meal;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -46,11 +50,17 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+
+
 public class ReviewlistActivity extends AppCompatActivity {
 
     // 메인 액티비티에서 런타임 권한 요청
     private static final int REQUEST_PERMISSION_CODE = 123;
 
+    private LineChart lineChartView;
     private RecyclerView recyclerView;
     private Button addReviewButton;
     private TextView caloryTextView;
@@ -64,6 +74,7 @@ public class ReviewlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviewlist);
 
+
         recyclerView = findViewById(R.id.recyclerView);
         addReviewButton = findViewById(R.id.addReviewButton);
         caloryTextView = findViewById(R.id.caloryTextView);
@@ -71,6 +82,7 @@ public class ReviewlistActivity extends AppCompatActivity {
         lunchTextView = findViewById(R.id.lunchTextView);
         dinnerTextView = findViewById(R.id.dinnerTextView);
         coffeeTextView = findViewById(R.id.coffeeTextView);
+        lineChartView = findViewById(R.id.lineChartView);
 
         // 저장된 Meal 리스트 불러오기
         List<Meal> mealList = loadMeals();
@@ -114,6 +126,7 @@ public class ReviewlistActivity extends AppCompatActivity {
 
         // 총 칼로리 및 비용 표시
         displayTotalStats(last30DaysMeals);
+        displayCaloriesOverTime(last30DaysMeals);
     }
 
     // 최근 30일 간의 데이터 필터링
@@ -152,7 +165,8 @@ public class ReviewlistActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("meal_preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("meal_list", null);
-        Type type = new TypeToken<ArrayList<Meal>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Meal>>() {
+        }.getType();
 
         if (json != null) {
             return gson.fromJson(json, type);
@@ -271,5 +285,51 @@ public class ReviewlistActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void displayCaloriesOverTime(List<Meal> meals) {
+        List<Entry> entries = new ArrayList<>(); // 날짜별 칼로리 섭취
+        List<Entry> cumulativeEntries = new ArrayList<>(); // 누적 분포 함수
+        int cumulativeCalories = 0;
+
+        for (Meal meal : meals) {
+            try {
+                Date mealDate = new SimpleDateFormat("yyyy-MM-dd").parse(meal.getDate());
+                int daysAgo = daysAgo(mealDate);
+                int calories = meal.getCalory();
+                cumulativeCalories += calories; // 누적 칼로리 합계 갱신
+                entries.add(new Entry(daysAgo, meal.getCalory()));
+                cumulativeEntries.add(new Entry(daysAgo, cumulativeCalories));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        LineDataSet dataSet = new LineDataSet(entries, "칼로리 섭취량");
+        LineData lineData = new LineData(dataSet);
+        lineChartView.setData(lineData);
+        lineChartView.getDescription().setEnabled(false); // chart 밑에 description 표시 없애기
+
+
+        // 누적 분포 함수 데이터셋과 데이터 추가
+        LineDataSet cumulativeDataSet = new LineDataSet(cumulativeEntries, "누적 칼로리");
+        cumulativeDataSet.setColor(Color.RED); // 누적 분포 함수 선의 색상 설정
+        cumulativeDataSet.setCircleColor(Color.RED);
+        lineData.addDataSet(cumulativeDataSet);
+
+        XAxis xAxis = lineChartView.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        YAxis yAxisLeft = lineChartView.getAxisLeft();
+        yAxisLeft.setDrawLabels(false); // label 삭제
+        YAxis yAxis = lineChartView.getAxisRight();
+        yAxis.setDrawLabels(false); // label 삭제
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value){
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_YEAR, -((int) value));
+                return new SimpleDateFormat("MM-dd").format(calendar.getTime());
+            }
+        });
+       lineChartView.invalidate();
     }
 }
