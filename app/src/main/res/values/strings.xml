@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">diet_calender</string>
     <string name="title_activity_intro">IntroActivity</string>
     <string name="intro">Mobile Software Project</string>
 </resources>

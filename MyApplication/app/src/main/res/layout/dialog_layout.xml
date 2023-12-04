@@ -1,0 +1,89 @@
+<!-- res/layout/dialog_layout.xml -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/dialogFoodImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/dialogFoodNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogFoodImageView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="음식 이름: "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/dialogDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogFoodNameTextView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="날짜: "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/dialogTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogDateTextView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="시간: "
+        android:textSize="18sp"/>
+
+    <!-- 나머지 데이터에 대한 TextView 추가 -->
+
+    <!-- 예시 -->
+    <TextView
+        android:id="@+id/dialogReviewTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogTimeTextView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="리뷰: "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/dialogCostTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogReviewTextView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="비용: "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/dialogReviewTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogCostTextView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="타입: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/dialogCaloryTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogReviewTypeTextView"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="칼로리 : "
+        android:textSize="18sp" />
+</RelativeLayout>

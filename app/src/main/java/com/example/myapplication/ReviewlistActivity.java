@@ -208,11 +208,11 @@ public class ReviewlistActivity extends AppCompatActivity {
             }
         }
 
-        caloryTextView.setText("총 칼로리: " + totalCalories);
-        breakfastTextView.setText("조식 비용: " + totalBreakfastCost);
-        lunchTextView.setText("중식 비용: " + totalLunchCost);
-        dinnerTextView.setText("석식 비용: " + totalDinnerCost);
-        coffeeTextView.setText("음료 비용: " + totalCoffeeCost);
+        caloryTextView.setText("\n최근 30일간 섭취량\n"+totalCalories +" Kcal");
+        breakfastTextView.setText("조식 비용: " + totalBreakfastCost+" 원");
+        lunchTextView.setText("중식 비용: " + totalLunchCost+" 원");
+        dinnerTextView.setText("석식 비용: " + totalDinnerCost+" 원");
+        coffeeTextView.setText("음료 비용: " + totalCoffeeCost+" 원");
     }
 
     private void showMealDialog(Meal meal) {
@@ -307,14 +307,16 @@ public class ReviewlistActivity extends AppCompatActivity {
         LineDataSet dataSet = new LineDataSet(entries, "칼로리 섭취량");
         LineData lineData = new LineData(dataSet);
         lineChartView.setData(lineData);
-        lineChartView.getDescription().setEnabled(false); // chart 밑에 description 표시 없애기
 
-
-        // 누적 분포 함수 데이터셋과 데이터 추가
         LineDataSet cumulativeDataSet = new LineDataSet(cumulativeEntries, "누적 칼로리");
         cumulativeDataSet.setColor(Color.RED); // 누적 분포 함수 선의 색상 설정
         cumulativeDataSet.setCircleColor(Color.RED);
+
+
+        // 누적 분포 함수 데이터셋과 데이터 추가
+
         lineData.addDataSet(cumulativeDataSet);
+        lineChartView.getDescription().setEnabled(false); // chart 밑에 description 표시 없애기
 
         XAxis xAxis = lineChartView.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);

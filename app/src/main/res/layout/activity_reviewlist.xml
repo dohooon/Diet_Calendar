@@ -4,107 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <!-- 식사 리뷰 목록 RecyclerView -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChartView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="138dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChartView"
+    <LinearLayout
+        android:id="@+id/analysisCluster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/caloryTextView"
             android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="9dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="총 칼로리 : "
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#181313" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/breakfastTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="조식 비용 : "
+                android:textColor="#1A0707" />
+
+            <TextView
+                android:id="@+id/lunchTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="중식 비용 : "
+                android:textColor="#1A0707" />
+
+            <TextView
+                android:id="@+id/dinnerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="석식 비용 : "
+                android:textColor="#1A0707" />
+
+            <TextView
+                android:id="@+id/coffeeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="음료 비용 : "
+                android:textColor="#1A0707" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="384dp"
         android:layout_above="@+id/buttonCluster"
         android:layout_below="@+id/analysisCluster"
         android:layout_marginStart="-1dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="-1dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="11dp" />
-
-
-    <LinearLayout
-
-        android:id="@+id/analysisCluster"
-        android:layout_width="395dp"
-        android:layout_height="148dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="1dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/monthTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:text="최근 30일 간" />
-
-        <TextView
-            android:id="@+id/caloryTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/monthTextView"
-
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:text="총 칼로리 : " />
-
-        <TextView
-            android:id="@+id/breakfastTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/caloryTextView"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:text="조식 비용 : " />
-
-        <TextView
-            android:id="@+id/lunchTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/breakfastTextView"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:text="중식 비용 : " />
-
-        <TextView
-            android:id="@+id/dinnerTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lunchTextView"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:text="석식 비용 : " />
-
-        <TextView
-            android:id="@+id/coffeeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/dinneerTextView"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="-1dp"
-            android:layout_marginBottom="1dp"
-            android:text="음료 비용 : " />
-
-    </LinearLayout>
+        android:layout_marginBottom="-1dp" />
 
     <LinearLayout
         android:id="@+id/buttonCluster"
@@ -138,6 +117,5 @@
             android:text="캘린더 보기" />
 
     </LinearLayout>
-
 
 </RelativeLayout>
