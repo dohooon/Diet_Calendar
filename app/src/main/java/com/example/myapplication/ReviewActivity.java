@@ -52,6 +52,7 @@ import java.util.Random;
 public class ReviewActivity extends AppCompatActivity {
 
     private Spinner locationSpinner;
+    private String selectedLocation;
     private ImageView foodImageView;
     private EditText foodNameEditText, reviewEditText, timeEditText, dateEditText, costEditText;
 
@@ -73,6 +74,10 @@ public class ReviewActivity extends AppCompatActivity {
         dateEditText = findViewById(R.id.dateEditText);
         costEditText = findViewById(R.id.costEditText);
         mealTypeRadioGroup = findViewById(R.id.mealTypeRadioGroup);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.location_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(adapter);
 
         // 시간 선택 팝업 설정
         timeEditText.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +194,8 @@ public class ReviewActivity extends AppCompatActivity {
         String time = timeEditText.getText().toString();
         String review = reviewEditText.getText().toString();
         String costString = costEditText.getText().toString();
-
+        String selectedLocation = locationSpinner.getSelectedItem().toString();
+        Log.e("ReviewActivity", selectedLocation);
         // 추가: 필수 입력값이 비어 있는지 확인
         if (TextUtils.isEmpty(foodName) || TextUtils.isEmpty(date) || TextUtils.isEmpty(time) || TextUtils.isEmpty(review) || TextUtils.isEmpty(costString)) {
             Toast.makeText(this, "모든 필수 항목을 입력하세요.", Toast.LENGTH_SHORT).show();
@@ -220,8 +226,8 @@ public class ReviewActivity extends AppCompatActivity {
         List<Meal> mealList = loadMeals();
 
         // 새로운 Meal 객체 생성
-        Meal meal = new Meal(foodName, date, time, mealType, review, cost, imagePath, calory);
-
+        Log.e("ReviewActivity", selectedLocation);
+        Meal meal = new Meal(foodName, date, time, mealType, review, cost, imagePath, calory, selectedLocation);
 
 
         // 리스트에 추가

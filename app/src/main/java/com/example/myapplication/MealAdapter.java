@@ -48,7 +48,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
         Meal meal = mealList.get(position);
         holder.foodNameTextView.setText(meal.getFoodName());
         holder.dateTextView.setText(meal.getDate());
-
+        holder.costTextView.setText(meal.getCost() + "원"); // Set the cost information
+        holder.locationTextView.setText(meal.getLocation());
 
         // 이미지 불러오기
         if (!TextUtils.isEmpty(meal.getImagePath())) {
@@ -113,6 +114,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
     public static class MealViewHolder extends RecyclerView.ViewHolder {
         TextView foodNameTextView;
         TextView dateTextView;
+        TextView costTextView;
+        TextView locationTextView;
         ImageView foodImageView; // Add this line
         Button deleteButton;
 
@@ -120,9 +123,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
             super(itemView);
             foodNameTextView = itemView.findViewById(R.id.foodNameTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
+            locationTextView=itemView.findViewById(R.id.locationTextView);
+            costTextView = itemView.findViewById(R.id.costTextView);
             foodImageView = itemView.findViewById(R.id.foodImageView); // Add this line
             deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
-
 }

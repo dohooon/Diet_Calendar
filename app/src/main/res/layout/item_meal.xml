@@ -1,42 +1,50 @@
-<!-- res/layout/meal_item.xml -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
     <!-- 음식 이미지뷰 -->
     <ImageView
         android:id="@+id/foodImageView"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:scaleType="centerCrop" />
 
-    <!-- 음식 이름 텍스트뷰 -->
-    <TextView
-        android:id="@+id/foodNameTextView"
-        android:layout_width="wrap_content"
+    <!-- 음식 이름과 날짜를 포함한 수평적인 레이아웃 -->
+    <LinearLayout
+        android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:layout_toEndOf="@id/foodImageView"
-        android:text="음식 이름"
-        android:textSize="18sp" />
+        android:orientation="horizontal">
 
-    <!-- 날짜 텍스트뷰 -->
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/foodNameTextView"
-        android:layout_toEndOf="@id/foodImageView"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="날짜"
-        android:textSize="14sp" />
+        <!-- 음식 이름 텍스트뷰 -->
+        <TextView
+            android:id="@+id/foodNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음식 이름"
+            android:textColor="#BE4848"
+            android:textSize="18sp" />
+
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="1dp" />
+
+        <!-- 날짜 텍스트뷰 -->
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="104dp"
+            android:layout_height="26dp"
+            android:text="날짜"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- Cost 텍스트뷰 -->
 
     <!-- 삭제 버튼 -->
+
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
@@ -45,5 +53,19 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
         android:text="삭제" />
+
+    <TextView
+        android:id="@+id/costTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/deleteButton"
+        android:layout_marginLeft="-120dp"
+        android:text="비용" />
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장소:" />
 
 </RelativeLayout>

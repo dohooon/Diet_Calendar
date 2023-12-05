@@ -13,9 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +30,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 
 import java.lang.reflect.Type;
@@ -88,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
             TextView dateView = findViewById(R.id.dateView);
             dateView.setText("선택 날짜: " + formatDate(date));
         });
+
+        // 오늘의 날짜를 dateView에 표시
+        TextView dateView = findViewById(R.id.dateView);
+        dateView.setText("선택 날짜: " + formatDate(CalendarDay.today()));
 
 //        // OnItemClickListener를 설정하고 전달
 //        MealAdapter adapter = new MealAdapter(mealList, new MealAdapter.OnItemClickListener() {
@@ -147,12 +148,12 @@ public class MainActivity extends AppCompatActivity {
         TextView dateTextView = dialogView.findViewById(R.id.dialogDateTextView);
         TextView timeTextView = dialogView.findViewById(R.id.dialogTimeTextView);
         TextView reviewTextView = dialogView.findViewById(R.id.dialogReviewTextView);
-        TextView costTextView = dialogView.findViewById(R.id.dialogCostTextView);
+        TextView costTextView = dialogView.findViewById(R.id.dialogcostTextView);
         TextView reviewTypeTextView = dialogView.findViewById(R.id.dialogReviewTypeTextView);
         // dialog_layout.xml에서 ImageView 추가한 부분과 매칭되는 ID 사용
         ImageView foodImageView = dialogView.findViewById(R.id.dialogFoodImageView);
         TextView caloryTextView = dialogView.findViewById(R.id.dialogCaloryTextView);
-
+        TextView locationTextView = dialogView.findViewById(R.id.dialoglocationTextView);
         // 런타임 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -185,14 +186,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        foodNameTextView.setText("음식 이름 : " + meal.getFoodName());
-        dateTextView.setText("날짜 : " + meal.getDate());
-        timeTextView.setText("시간 : " + meal.getTime());
-        reviewTextView.setText("리뷰 : " + meal.getReview());
-        costTextView.setText("비용 : " + meal.getCost());
-        reviewTypeTextView.setText("타입 : " + meal.getMealType());
-        caloryTextView.setText("칼로리 : " + meal.getCalory());
-
+        foodNameTextView.setText(" ● 음식 이름 : " + meal.getFoodName());
+        dateTextView.setText("● 날짜 : " + meal.getDate());
+        timeTextView.setText("● 시간 : " + meal.getTime());
+        reviewTextView.setText("● 리뷰 : " + meal.getReview());
+        costTextView.setText("● 비용 : " + meal.getCost());
+        reviewTypeTextView.setText("● 타입 : " + meal.getMealType());
+        caloryTextView.setText("● 칼로리 : " + meal.getCalory()+" Kcal");
+        locationTextView.setText("● 장소 : "+meal.getLocation());
         // Add more details...
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

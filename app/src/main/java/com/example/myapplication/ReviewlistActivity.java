@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,14 +16,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +36,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.annotation.Target;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +44,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
@@ -68,7 +61,7 @@ public class ReviewlistActivity extends AppCompatActivity {
     private TextView lunchTextView;
     private TextView dinnerTextView;
     private TextView coffeeTextView;
-
+private TextView locationTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +76,7 @@ public class ReviewlistActivity extends AppCompatActivity {
         dinnerTextView = findViewById(R.id.dinnerTextView);
         coffeeTextView = findViewById(R.id.coffeeTextView);
         lineChartView = findViewById(R.id.lineChartView);
-
+        locationTextView= findViewById(R.id.locationTextView);
         // 저장된 Meal 리스트 불러오기
         List<Meal> mealList = loadMeals();
 
@@ -213,6 +206,7 @@ public class ReviewlistActivity extends AppCompatActivity {
         lunchTextView.setText("중식 비용: " + totalLunchCost+" 원");
         dinnerTextView.setText("석식 비용: " + totalDinnerCost+" 원");
         coffeeTextView.setText("음료 비용: " + totalCoffeeCost+" 원");
+
     }
 
     private void showMealDialog(Meal meal) {
@@ -228,12 +222,12 @@ public class ReviewlistActivity extends AppCompatActivity {
         TextView dateTextView = dialogView.findViewById(R.id.dialogDateTextView);
         TextView timeTextView = dialogView.findViewById(R.id.dialogTimeTextView);
         TextView reviewTextView = dialogView.findViewById(R.id.dialogReviewTextView);
-        TextView costTextView = dialogView.findViewById(R.id.dialogCostTextView);
+        TextView costTextView = dialogView.findViewById(R.id.dialogcostTextView);
         TextView reviewTypeTextView = dialogView.findViewById(R.id.dialogReviewTypeTextView);
         // dialog_layout.xml에서 ImageView 추가한 부분과 매칭되는 ID 사용
         ImageView foodImageView = dialogView.findViewById(R.id.dialogFoodImageView);
         TextView caloryTextView = dialogView.findViewById(R.id.dialogCaloryTextView);
-
+        TextView locationTextView = dialogView.findViewById(R.id.dialoglocationTextView);
         // 런타임 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -273,7 +267,7 @@ public class ReviewlistActivity extends AppCompatActivity {
         costTextView.setText("비용 : " + meal.getCost());
         reviewTypeTextView.setText("타입 : " + meal.getMealType());
         caloryTextView.setText("칼로리 : " + meal.getCalory());
-
+        locationTextView.setText("장소 : "+meal.getLocation());
         // Add more details...
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -286,52 +280,69 @@ public class ReviewlistActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     private void displayCaloriesOverTime(List<Meal> meals) {
         List<Entry> entries = new ArrayList<>(); // 날짜별 칼로리 섭취
-        List<Entry> cumulativeEntries = new ArrayList<>(); // 누적 분포 함수
-        int cumulativeCalories = 0;
+
+        // 데이터를 날짜순으로 정렬
+        Collections.sort(meals);
+
 
         for (Meal meal : meals) {
             try {
                 Date mealDate = new SimpleDateFormat("yyyy-MM-dd").parse(meal.getDate());
                 int daysAgo = daysAgo(mealDate);
-                int calories = meal.getCalory();
-                cumulativeCalories += calories; // 누적 칼로리 합계 갱신
-                entries.add(new Entry(daysAgo, meal.getCalory()));
-                cumulativeEntries.add(new Entry(daysAgo, cumulativeCalories));
+
+                // 같은 날짜인 경우 누적값에 계속 더해주기
+                boolean entryExists = false;
+                for (Entry entry : entries) {
+                    if (entry.getX() == daysAgo) {
+                        entry.setY(entry.getY() + meal.getCalory());
+                        entryExists = true;
+                        break;
+                    }
+                }
+
+                if (!entryExists) {
+                    entries.add(new Entry(daysAgo, meal.getCalory()));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+
         LineDataSet dataSet = new LineDataSet(entries, "칼로리 섭취량");
         LineData lineData = new LineData(dataSet);
+
         lineChartView.setData(lineData);
-
-        LineDataSet cumulativeDataSet = new LineDataSet(cumulativeEntries, "누적 칼로리");
-        cumulativeDataSet.setColor(Color.RED); // 누적 분포 함수 선의 색상 설정
-        cumulativeDataSet.setCircleColor(Color.RED);
-
-
-        // 누적 분포 함수 데이터셋과 데이터 추가
-
-        lineData.addDataSet(cumulativeDataSet);
         lineChartView.getDescription().setEnabled(false); // chart 밑에 description 표시 없애기
+
 
         XAxis xAxis = lineChartView.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        YAxis yAxisLeft = lineChartView.getAxisLeft();
-        yAxisLeft.setDrawLabels(false); // label 삭제
-        YAxis yAxis = lineChartView.getAxisRight();
-        yAxis.setDrawLabels(false); // label 삭제
+
+
+        // X축에 날짜 표시하기
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
-            public String getFormattedValue(float value){
+            public String getFormattedValue(float value) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DAY_OF_YEAR, -((int) value));
                 return new SimpleDateFormat("MM-dd").format(calendar.getTime());
             }
         });
-       lineChartView.invalidate();
+
+        // X축 라벨 개수 설정 (옵션)
+        xAxis.setLabelCount(entries.size(), true);
+
+        // X축의 라벨 간격 조정 (옵션)
+        xAxis.setGranularity(1f);
+
+        YAxis yAxisLeft = lineChartView.getAxisLeft();
+        yAxisLeft.setDrawLabels(false); // label 삭제
+        YAxis yAxis = lineChartView.getAxisRight();
+        yAxis.setDrawLabels(false); // label 삭제
+
+        lineChartView.invalidate();
     }
 }

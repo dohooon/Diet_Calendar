@@ -13,10 +13,12 @@ public class Meal implements Comparable<Meal> {
     private String review;
     private Integer cost;
     private String mealType;
-    private String imagePath; // 추가: 이미지 파일 경로
+    private String imagePath;
     private Integer calory;
+    private String location;
 
-    public Meal(String foodName, String date, String time, String mealType, String review, Integer cost, String imagePath, Integer calory) {
+    public Meal(String foodName, String date, String time, String mealType, String review,
+                Integer cost, String imagePath, Integer calory, String location) {
         this.foodName = foodName;
         this.date = date;
         this.time = time;
@@ -25,25 +27,45 @@ public class Meal implements Comparable<Meal> {
         this.cost = cost;
         this.imagePath = imagePath;
         this.calory = calory;
+        this.location = location;
+
     }
 
-    public String getFoodName() { return foodName; }
+    public String getFoodName() {
+        return foodName;
+    }
 
-    public String getDate() { return date; }
+    public String getDate() {
+        return date;
+    }
 
-    public String getMealType() { return mealType; }
+    public String getMealType() {
+        return mealType;
+    }
 
-    public String getTime() { return time; }
+    public String getTime() {
+        return time;
+    }
 
-    public String getReview() { return review; }
+    public String getReview() {
+        return review;
+    }
 
-    public Integer getCost() { return cost; }
+    public Integer getCost() {
+        return cost;
+    }
 
-    public String getImagePath() { return imagePath; } // 추가: 이미지 파일 경로 반환
+    public String getImagePath() {
+        return imagePath;
+    } // 추가: 이미지 파일 경로 반환
 
-    public Integer getCalory() { return calory; }
+    public Integer getCalory() {
+        return calory;
+    }
 
-
+    public String getLocation() {
+        return location;
+    }
 
 
     @Override
@@ -60,8 +82,6 @@ public class Meal implements Comparable<Meal> {
             return 0; // 날짜를 비교할 수 없는 경우
         }
     }
-
-
 
 
 }
