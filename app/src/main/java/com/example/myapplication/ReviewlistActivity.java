@@ -2,11 +2,14 @@ package com.example.myapplication;
 
 // ReviewListActivity.java
 
+import static java.security.AccessController.getContext;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,8 +21,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,12 +67,14 @@ public class ReviewlistActivity extends AppCompatActivity {
     private TextView lunchTextView;
     private TextView dinnerTextView;
     private TextView coffeeTextView;
-private TextView locationTextView;
+    private TextView locationTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviewlist);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         recyclerView = findViewById(R.id.recyclerView);
         addReviewButton = findViewById(R.id.addReviewButton);
@@ -76,7 +84,7 @@ private TextView locationTextView;
         dinnerTextView = findViewById(R.id.dinnerTextView);
         coffeeTextView = findViewById(R.id.coffeeTextView);
         lineChartView = findViewById(R.id.lineChartView);
-        locationTextView= findViewById(R.id.locationTextView);
+        //locationTextView= findViewById(R.id.locationTextView);
         // 저장된 Meal 리스트 불러오기
         List<Meal> mealList = loadMeals();
 
@@ -86,7 +94,8 @@ private TextView locationTextView;
         // RecyclerView 설정
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         // 최근 30일 간의 데이터 필터링
         List<Meal> last30DaysMeals = filterMealsByDate(mealList, 30);
 
@@ -260,14 +269,14 @@ private TextView locationTextView;
             }
         }
 
-        foodNameTextView.setText("음식 이름 : " + meal.getFoodName());
-        dateTextView.setText("날짜 : " + meal.getDate());
-        timeTextView.setText("시간 : " + meal.getTime());
-        reviewTextView.setText("리뷰 : " + meal.getReview());
-        costTextView.setText("비용 : " + meal.getCost());
-        reviewTypeTextView.setText("타입 : " + meal.getMealType());
-        caloryTextView.setText("칼로리 : " + meal.getCalory());
-        locationTextView.setText("장소 : "+meal.getLocation());
+        foodNameTextView.setText("● 음식 이름 : " + meal.getFoodName());
+        dateTextView.setText("● 날짜 : " + meal.getDate());
+        timeTextView.setText("● 시간 : " + meal.getTime());
+        reviewTextView.setText("● 리뷰 : " + meal.getReview());
+        costTextView.setText("● 비용 : " + meal.getCost()+"원");
+        reviewTypeTextView.setText("● 타입 : " + meal.getMealType());
+        caloryTextView.setText("● 칼로리 : " + meal.getCalory()+" Kcal");
+        locationTextView.setText("● 장소 : "+meal.getLocation());
         // Add more details...
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -309,18 +318,24 @@ private TextView locationTextView;
                 e.printStackTrace();
             }
         }
+        if (entries.isEmpty()) {
+            // 데이터가 없는 경우 "NO DATA" 메시지 표시
+            entries.add(new Entry(0, 0)); // 임의의 값 추가
+            LineDataSet dataSet = new LineDataSet(entries, "DATA DOES NOT EXIST.");
+            dataSet.setColor(Color.BLACK);
+            LineData lineData = new LineData(dataSet);
+            lineChartView.setData(lineData);
+        } else {
+            LineDataSet dataSet = new LineDataSet(entries, "칼로리 섭취량");
+            LineData lineData = new LineData(dataSet);
+            lineChartView.setData(lineData);
+        }
 
-
-        LineDataSet dataSet = new LineDataSet(entries, "칼로리 섭취량");
-        LineData lineData = new LineData(dataSet);
-
-        lineChartView.setData(lineData);
         lineChartView.getDescription().setEnabled(false); // chart 밑에 description 표시 없애기
 
 
         XAxis xAxis = lineChartView.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
 
         // X축에 날짜 표시하기
         xAxis.setValueFormatter(new ValueFormatter() {
@@ -342,6 +357,7 @@ private TextView locationTextView;
         yAxisLeft.setDrawLabels(false); // label 삭제
         YAxis yAxis = lineChartView.getAxisRight();
         yAxis.setDrawLabels(false); // label 삭제
+
 
         lineChartView.invalidate();
     }

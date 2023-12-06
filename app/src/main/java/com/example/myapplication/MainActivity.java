@@ -1,10 +1,15 @@
 package com.example.myapplication;
 
+import static java.security.AccessController.getContext;
+
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,8 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +40,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 
 import java.lang.reflect.Type;
+import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -52,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         recyclerView = findViewById(R.id.recyclerView);
 
         MaterialCalendarView calendarView = findViewById(R.id.calendarView);
@@ -70,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             // 리사이클러뷰를 초기화하고 필터링된 리뷰를 설정
             RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
             mealAdapter = new MealAdapter(filteredMeals, new MealAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(Meal meal) {
@@ -83,23 +93,22 @@ public class MainActivity extends AppCompatActivity {
 
             // 선택된 날짜를 dateView에 표시
             TextView dateView = findViewById(R.id.dateView);
-            dateView.setText("선택 날짜: " + formatDate(date));
+            dateView.setText(" ● 선택 날짜 : " + formatDate(date));
         });
 
         // 오늘의 날짜를 dateView에 표시
         TextView dateView = findViewById(R.id.dateView);
-        dateView.setText("선택 날짜: " + formatDate(CalendarDay.today()));
+        dateView.setText(" ● 선택 날짜 : " + formatDate(CalendarDay.today()));
 
 //        // OnItemClickListener를 설정하고 전달
 //        MealAdapter adapter = new MealAdapter(mealList, new MealAdapter.OnItemClickListener() {
-//            @Override
+//            @Override짜
 //            public void onItemClick(Meal meal) {
 //                showMealDialog(meal);
 //            }
 //        });
 //        recyclerView.setAdapter(adapter);
     }
-
 
 
     // CalendarDay를 날짜 문자열로 변환하는 메서드
@@ -112,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("meal_preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("meal_list", null);
-        Type type = new TypeToken<ArrayList<Meal>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Meal>>() {
+        }.getType();
 
         if (json != null) {
             return gson.fromJson(json, type);
@@ -132,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ReviewlistActivity.class);
         startActivity(intent);
     }
-
 
 
     private void showMealDialog(Meal meal) {
@@ -186,14 +195,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        foodNameTextView.setText(" ● 음식 이름 : " + meal.getFoodName());
+        foodNameTextView.setText("● 음식 이름 : " + meal.getFoodName());
         dateTextView.setText("● 날짜 : " + meal.getDate());
         timeTextView.setText("● 시간 : " + meal.getTime());
         reviewTextView.setText("● 리뷰 : " + meal.getReview());
-        costTextView.setText("● 비용 : " + meal.getCost());
+        costTextView.setText("● 비용 : " + meal.getCost() + "원");
         reviewTypeTextView.setText("● 타입 : " + meal.getMealType());
-        caloryTextView.setText("● 칼로리 : " + meal.getCalory()+" Kcal");
-        locationTextView.setText("● 장소 : "+meal.getLocation());
+        caloryTextView.setText("● 칼로리 : " + meal.getCalory() + " Kcal");
+        locationTextView.setText("● 장소 : " + meal.getLocation());
         // Add more details...
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

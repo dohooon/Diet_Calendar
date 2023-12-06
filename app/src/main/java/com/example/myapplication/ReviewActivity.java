@@ -25,7 +25,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 
-
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
@@ -64,7 +64,8 @@ public class ReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         // UI 요소 초기화
         locationSpinner = findViewById(R.id.locationSpinner);
         foodImageView = findViewById(R.id.foodImageView);

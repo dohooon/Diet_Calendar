@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:textAlignment="center">
 
     <!-- 학식 장소 선택 -->
     <Spinner
@@ -10,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:entries="@array/location_array"
-        android:prompt="@string/location_prompt" />
+        android:prompt="@string/location_prompt"
+        android:textAlignment="center" />
 
     <!-- 음식 사진 입력 -->
     <ImageView
@@ -19,9 +21,9 @@
         android:layout_height="200dp"
         android:layout_below="@id/locationSpinner"
         android:layout_marginTop="16dp"
+        android:onClick="selectFoodImage"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_foreground"
-        android:onClick="selectFoodImage"/>
+        android:src="@drawable/ic_launcher_foreground" />
 
     <!-- 음식과 반찬 이름 입력 -->
     <EditText
@@ -30,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/foodImageView"
         android:layout_marginTop="16dp"
-        android:hint="음식 및 반찬 이름"/>
+        android:hint="음식 및 반찬 이름"
+        android:textAlignment="center" />
 
     <!-- 라디오 버튼 그룹 -->
     <RadioGroup
@@ -83,7 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/mealTypeRadioGroup"
         android:layout_marginTop="16dp"
-        android:hint="음식 소감 또는 평가"/>
+        android:hint="음식 소감 또는 평가"
+        android:textAlignment="center" />
 
     <!-- 날짜 선택 EditText -->
     <EditText
@@ -92,10 +96,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/reviewEditText"
         android:layout_marginTop="16dp"
-        android:inputType="none"
-        android:hint="날짜 선택"
         android:focusable="false"
-        android:onClick="showDatePickerDialog"/>
+        android:hint="날짜 선택"
+        android:inputType="none"
+        android:onClick="showDatePickerDialog"
+        android:textAlignment="center" />
 
     <!-- 시간 선택 EditText -->
     <EditText
@@ -104,10 +109,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dateEditText"
         android:layout_marginTop="16dp"
-        android:inputType="none"
-        android:hint="시간 선택"
         android:focusable="false"
-        android:onClick="showTimePickerDialog"/>
+        android:hint="시간 선택"
+        android:inputType="none"
+        android:onClick="showTimePickerDialog"
+        android:textAlignment="center" />
 
     <!-- 비용 입력 -->
     <EditText
@@ -117,15 +123,19 @@
         android:layout_below="@id/timeEditText"
         android:layout_marginTop="16dp"
         android:hint="비용"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textAlignment="center" />
 
     <!-- 저장 버튼 -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="저장"
         android:layout_below="@id/costEditText"
-        android:layout_marginTop="16dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/roundbutton"
+        android:text="저장" />
+
 
 </RelativeLayout>
