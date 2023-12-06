@@ -22,7 +22,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="172dp"
         android:layout_below="@id/dateView"
         android:layout_marginTop="8dp" />
 
@@ -30,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="11dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -42,6 +43,7 @@
             android:layout_weight="1"
             android:background="@drawable/roundbutton"
             android:onClick="goToReviewActivity"
+            android:orientation="horizontal"
             android:text="식사 리뷰 작성"
             android:textAlignment="center"
             android:textSize="16sp" />
