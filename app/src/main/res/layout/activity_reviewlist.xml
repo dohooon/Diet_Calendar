@@ -13,13 +13,27 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp" />
 
+
+    <TextView
+        android:id="@+id/monthlyAnalysisTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineChartView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:background="#F1DFA8"
+        android:text="! 한 달 분석 ! "
+        android:textColor="#181313"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
+
     <LinearLayout
         android:id="@+id/analysisCluster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/monthlyAnalysisTextView"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="151dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="1dp"
         android:orientation="horizontal">
 
@@ -28,9 +42,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
             android:text="총 칼로리 : "
             android:textAlignment="center"
-            android:fontFamily="sans-serif-black"
             android:textColor="#181313" />
 
         <LinearLayout
@@ -71,16 +85,15 @@
 
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="398dp"
         android:layout_above="@+id/buttonCluster"
         android:layout_below="@+id/analysisCluster"
         android:layout_marginStart="-1dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="-1dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="11dp" />

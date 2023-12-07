@@ -67,7 +67,7 @@ public class ReviewlistActivity extends AppCompatActivity {
     private TextView lunchTextView;
     private TextView dinnerTextView;
     private TextView coffeeTextView;
-    private TextView locationTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +84,7 @@ public class ReviewlistActivity extends AppCompatActivity {
         dinnerTextView = findViewById(R.id.dinnerTextView);
         coffeeTextView = findViewById(R.id.coffeeTextView);
         lineChartView = findViewById(R.id.lineChartView);
-        //locationTextView= findViewById(R.id.locationTextView);
+
         // 저장된 Meal 리스트 불러오기
         List<Meal> mealList = loadMeals();
 
