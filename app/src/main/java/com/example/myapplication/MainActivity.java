@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        // OnItemClickListener를 설정하고 전달
 //        MealAdapter adapter = new MealAdapter(mealList, new MealAdapter.OnItemClickListener() {
-//            @Override짜
+//            @Override
 //            public void onItemClick(Meal meal) {
 //                showMealDialog(meal);
 //            }

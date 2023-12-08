@@ -4,6 +4,7 @@
         <item>상록원 2층</item>
         <item>상록원 3층</item>
         <item>기숙사 식당</item>
+        <item>가온누리카페</item>
     </string-array>
 
     <string name="location_prompt">학식 장소 선택</string>

@@ -52,7 +52,6 @@ import java.util.Random;
 public class ReviewActivity extends AppCompatActivity {
 
     private Spinner locationSpinner;
-    private String selectedLocation;
     private ImageView foodImageView;
     private EditText foodNameEditText, reviewEditText, timeEditText, dateEditText, costEditText;
 
